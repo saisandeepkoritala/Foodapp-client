@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
-
+import {BrowserRouter,Routes,Route,Link} from "react-router-dom";
+import {FaBars} from "react-icons/fa";
+import Home from "./components/Home";
+import Categories from "./components/Categories";
+import Productpage from "./components/Productpage";
+import { useRef } from "react";
+import Details from "./components/Details";
 function App() {
+  const Ref=useRef();
+  const handleClick=()=>{
+    Ref.current.classList.toggle("small");
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+  <BrowserRouter> 
+      <div className="navbar grey" ref={Ref}>
+        <Link to="/">Home</Link>
+        <Link to="/categories">Categories</Link>
+        <Link to="/productpage">Product page</Link>
+        <Link className="bars"><FaBars onClick={handleClick}/></Link>
+      </div>
+      <div className="routes">
+        <Routes>
+          <Route element={<Home />} path="/"/>
+          <Route element={<Categories />} path="/categories"/>
+          <Route element={<Productpage />} path="/productpage"/>
+          <Route element={<Details/>} path="/details/:id" />
+        </Routes>
+      </div>
+  </BrowserRouter>
+)}
 
 export default App;
