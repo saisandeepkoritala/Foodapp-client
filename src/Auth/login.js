@@ -9,6 +9,7 @@ const Login = () => {
     const [formData, setFormData] = useState({
         username: '',
         password: '',
+
     });
 
     const navigate = useNavigate();
@@ -24,18 +25,18 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const response = await axios.post("https://mern-food-app-loq7.onrender.com/api/v1/user/login",
-        {email:formData.username,password:formData.password})
-        console.log(response)
-        if(!response.data.error){
-        Setuser(true);
-        navigate('/home');
-        }
-        else{
-            navigate("/")
-        }
+        // const response = await axios.post("https://mern-food-app-loq7.onrender.com/api/v1/user/login",
+        // {email:formData.username,password:formData.password})
+        // console.log(response)
+        // if(!response.data.error){
         // Setuser(true);
-        // navigate("/home");
+        // navigate('/home');
+        // }
+        // else{
+        //     navigate("/")
+        // }
+        Setuser(true);
+        navigate("/home");
 
     };
 

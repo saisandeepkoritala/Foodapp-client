@@ -315,6 +315,28 @@
 .routes .categ .food a strong{
   color:green;
 }
+
+.routes .page{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.routes .page .items{
+  width:300px;
+  height:300px;
+}
+
+.routes .page .items p{
+  width:200px;
+  text-transform: capitalize;
+}
+
+.routes .page .items p strong{
+  color:green;
+  text-transform: capitalize;
+}
 /* navbar */
 
 /* media query for mobile */
