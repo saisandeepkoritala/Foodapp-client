@@ -5,6 +5,9 @@ const NavigationContext = createContext();
 
 function Provider({children}){
     const[data,Setdata]=useState([]);
+    const[user,Setuser]=useState(false);
+    const[signuser,Setsignuser]=useState(false);
+    const[cart,Setcart]=useState([]);
 
     useEffect(()=>{
         Unsplash("Food")
@@ -12,8 +15,21 @@ function Provider({children}){
         .catch((err)=>console.log("error",err))
     },[])
 
+    const addCart=(item)=>{
+
+        const duplicate=cart.find((dish)=>dish.id===item.id)
+        if(!duplicate){
+        Setcart([...cart,{...item,quantity:1}])
+        }
+        else{
+            console.log("duplicate")
+        }
+    }
+
+
     const valueToShare={
-        data:data
+        data,Setdata,user,Setuser,Setsignuser,signuser,addCart,cart,Setcart
+
     }
     return (
         <NavigationContext.Provider value={valueToShare}>

@@ -1,45 +1,36 @@
 import React from 'react'
-import {AiOutlineMinus,AiOutlinePlus} from "react-icons/ai";
 import { useParams } from 'react-router-dom';
 import { useContext} from "react";
 import NavigationContext from "../context/Navigation";
-import {useState} from "react";
+import { Link } from 'react-router-dom';
 
 const Details = () => {
-    const[num,Setnum]=useState(0);
-    console.log(typeof num)
+
     const id=useParams();
-    const {data}=useContext(NavigationContext);
-    const dish=data.find((item)=>item.id===id.id)
-    const price=dish.likes * num;
+    const {data,addCart}=useContext(NavigationContext);
+    const dish=data.find((item)=>item.id===id.id);
+
+    const otheritems=data.slice(10,25);
+
+    const rendereditem=otheritems.map((item)=>{
+        return <Link key={item.id} to={`/details/${item.id}`}>
+            <img src={item.urls.small} alt=""></img>
+        </Link>
+    })
+
     const rendered=<div key={dish.id} className='dish'>
     <img src={dish.urls.small} alt=""/>
     <p>{dish.alt_description}</p>
-    <p>Price - ${dish.likes}</p>
+    <p>Price - <strong>${dish.likes}</strong></p>
+    <button onClick={()=>addCart(dish)}>Add to Cart</button>
     </div>
 return (
     <div className='details'>
         {rendered}
-        <div className='more-details'>
-            <div className='num'>
-                <AiOutlineMinus size="60" className='icon' 
-                onClick={()=>{
-                    if(num>0){
-                    Setnum(Number(num-1))
-                    }
-                    else{
-                        Setnum(0)
-                    }
-                    }}/>
-                <p>{num}</p>
-                <AiOutlinePlus size="60" className='icon'
-                onClick={()=>Setnum(Number(num+1))}/>
-            </div>
+        <div className='other'>
+            <p>Users also prefer to order these along with the dish</p>
             <div>
-                <h2>Select the Quantity</h2>
-            </div>
-            <div>
-                <h2>Price - {price}</h2>
+                {rendereditem}
             </div>
         </div>
     </div>

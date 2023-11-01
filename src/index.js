@@ -8,6 +8,6 @@ import {Provider} from "./context/Navigation";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <Provider>
-        <App />
+        <App/>
     </Provider>
     );
