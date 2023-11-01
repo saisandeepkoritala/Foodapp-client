@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import NavigationContext from "../context/Navigation";
 
 const Home = () => {
-  const { data } = useContext(NavigationContext);
+  const { data} = useContext(NavigationContext);
 
     const rendered=data.map((item,i)=>{
       return <Link key={item.id} to={`/details/${item.id}`} className="link">

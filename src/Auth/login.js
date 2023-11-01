@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import NavigationContext from '../context/Navigation';
 import axios from 'axios';
+import {ToastContainer,toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
     const {Setuser,Setsignuser}=useContext(NavigationContext);
@@ -21,6 +23,27 @@ const Login = () => {
             [name]: value,
         });
     };
+    const notify=()=>{
+        console.log("logging in")
+        toast.success("Logged in !!",{
+            position:toast.POSITION.TOP_RIGHT
+        })
+    }
+
+    const notifyFail=()=>{
+        console.log("error")
+        toast.error("Please Check Credentials !!",{
+            position:toast.POSITION.TOP_RIGHT
+        })
+    }
+
+    const notifySign=()=>{
+        toast.success("Hang on!!",{
+            position:toast.POSITION.TOP_RIGHT
+        })
+    }
+
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -29,10 +52,15 @@ const Login = () => {
         {email:formData.username,password:formData.password})
         console.log(response)
         if(!response.data.error){
-        Setuser(true);
-        navigate('/home');
+        notify();
+        setTimeout(()=> {
+            Setuser(true);
+            navigate('/home');
+        }, 2000);
+    
         }
         else{
+            notifyFail()
             navigate("/")
         }
         // Setuser(true);
@@ -65,12 +93,17 @@ const Login = () => {
                     />
                 </div>
                 <button type="submit" style={styles.submitButton}>Login</button>
+                <ToastContainer/>
             </form>
             <div>
             <button type="submit" style={styles.submitButton} 
             onClick={()=>{
-                Setsignuser(true)
-                navigate("/signup")
+                notifySign();
+                setTimeout(()=> {
+                    Setsignuser(true)
+                    navigate("/signup")
+                }, 2000);
+                
                 }}>Sign Up</button>
             </div>
         </div>

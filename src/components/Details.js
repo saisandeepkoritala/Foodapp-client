@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useContext} from "react";
 import NavigationContext from "../context/Navigation";
 import { Link } from 'react-router-dom';
+import {ToastContainer} from "react-toastify";
 
 const Details = () => {
 
@@ -11,6 +12,7 @@ const Details = () => {
     const dish=data.find((item)=>item.id===id.id);
 
     const otheritems=data.slice(10,25);
+    
 
     const rendereditem=otheritems.map((item)=>{
         return <Link key={item.id} to={`/details/${item.id}`}>
@@ -23,6 +25,7 @@ const Details = () => {
     <p>{dish.alt_description}</p>
     <p>Price - <strong>${dish.likes}</strong></p>
     <button onClick={()=>addCart(dish)}>Add to Cart</button>
+    <ToastContainer/>
     </div>
 return (
     <div className='details'>

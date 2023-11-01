@@ -1,5 +1,7 @@
 import {createContext, useState,useEffect} from "react";
 import Unsplash from "../Unsplash/pics";
+import { toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const NavigationContext = createContext();
 
@@ -15,13 +17,26 @@ function Provider({children}){
         .catch((err)=>console.log("error",err))
     },[])
 
-    const addCart=(item)=>{
+    const notify=()=>{
+        toast.success("Added to cart !!",{
+            position:toast.POSITION.TOP_RIGHT
+        })
+    }
 
+    const notifyFail=()=>{
+        toast.error("Item already in cart !!",{
+            position:toast.POSITION.TOP_RIGHT
+        })
+    }
+    
+    const addCart=(item)=>{
         const duplicate=cart.find((dish)=>dish.id===item.id)
         if(!duplicate){
+        notify()
         Setcart([...cart,{...item,quantity:1}])
         }
         else{
+            notifyFail()
             console.log("duplicate")
         }
     }
