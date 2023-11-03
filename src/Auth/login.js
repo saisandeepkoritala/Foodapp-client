@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState,useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import NavigationContext from '../context/Navigation';
@@ -7,6 +7,11 @@ import {ToastContainer,toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
+
+    useEffect(()=>{
+        Ref.current.focus();
+    },[])
+    const Ref=useRef();
     const {Setuser,Setsignuser}=useContext(NavigationContext);
     const [formData, setFormData] = useState({
         username: '',
@@ -23,9 +28,8 @@ const Login = () => {
             [name]: value,
         });
     };
-    const notify=()=>{
-        console.log("logging in")
-        toast.success("Logged in !!",{
+    const notify=(name)=>{
+        toast.success(`Welcome back ${name}!!`,{
             position:toast.POSITION.TOP_RIGHT
         })
     }
@@ -52,7 +56,8 @@ const Login = () => {
         {email:formData.username,password:formData.password})
         console.log(response)
         if(!response.data.error){
-        notify();
+        const name=response.data.data.user.name;
+        notify(name);
         setTimeout(()=> {
             Setuser(true);
             navigate('/home');
@@ -80,6 +85,8 @@ const Login = () => {
                         value={formData.username}
                         onChange={handleInputChange}
                         style={styles.input}
+                        placeholder='johndoe@gmail.com'
+                        ref={Ref}
                     />
                 </div>
                 <div style={styles.formGroup}>
@@ -90,10 +97,11 @@ const Login = () => {
                         value={formData.password}
                         onChange={handleInputChange}
                         style={styles.input}
+                        placeholder='password'
                     />
                 </div>
                 <button type="submit" style={styles.submitButton}>Login</button>
-                <ToastContainer/>
+                <ToastContainer style={styles.toast}/>
             </form>
             <div>
             <button type="submit" style={styles.submitButton} 
@@ -149,6 +157,9 @@ const styles = {
         cursor: 'pointer',
         margin:"5px"
     },
+    toast:{
+        width:'300px'
+    }
     };
 
 export default Login;

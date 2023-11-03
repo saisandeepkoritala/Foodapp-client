@@ -3,6 +3,8 @@ import { useContext } from 'react';
 import NavigationContext from '../context/Navigation';
 import { AiOutlineMinus, AiOutlinePlus} from 'react-icons/ai';
 import {BsTrash3} from "react-icons/bs";
+import {ToastContainer,toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Cart = () => {
     const { cart ,Setcart} = useContext(NavigationContext);
@@ -32,7 +34,14 @@ const Cart = () => {
         setCartItems(updatedCart);
     };
 
+    const notify=()=>{
+        toast.success("Item removed from cart !!",{
+            position:toast.POSITION.TOP_RIGHT
+        })
+    }
+
     const removeItem =(id)=>{
+        notify()
         const updated = cart.filter((item)=>item.id!==id)
         setCartItems([...updated])
         Setcart([...updated])
@@ -74,6 +83,7 @@ const Cart = () => {
     return <div className="cart">
         {render}
         {message}
+        <ToastContainer/>
         </div>;
 };
 
