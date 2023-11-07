@@ -23,10 +23,10 @@ function App() {
   return (
     <BrowserRouter>
       <div className="navbar grey" ref={Ref}>
-        <Link to="/home">Home</Link>
-        <Link to="/categories">Categories</Link>
-        <Link to="/productpage">Product page</Link>
-        <Link to="/cart">
+        <Link to="/home" onClick={handleClick}>Home</Link>
+        <Link to="/categories" onClick={handleClick}>Categories</Link>
+        <Link to="/productpage" onClick={handleClick}>Product page</Link>
+        <Link to="/cart" onClick={handleClick}>
           <div className="out">
             Cart
             <div className="in">
