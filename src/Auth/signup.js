@@ -44,7 +44,7 @@ function Signup() {
 
     const handleSubmit = async(e) => {
         e.preventDefault();
-        const response = await axios.post("https://mern-food-app-loq7.onrender.com/api/v1/user/signup",formData)
+        const response = await axios.post("https://mern-food-app-updj.onrender.com/api/v1/user/signup",formData)
         if(!response.data.error){
             const name=response.data.data.user.name;
             notify(name);
