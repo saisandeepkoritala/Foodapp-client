@@ -117,6 +117,9 @@ const Login = () => {
                 }, 2000);
                 
                 }}>Sign Up</button>
+                <div>
+                <p> *Greetings, with the back end being deployed on Render with inactivity it spins down server,please press login a bunch of times ,after a while you will get "Please check Credentials", now you can use app</p>
+                </div>
             </div>
         </div>
     );
@@ -125,7 +128,7 @@ const Login = () => {
 const styles = {
     container: {
         width: '400px',
-        height:"400px",
+        height:"75vh",
         margin: '0 auto',
         padding: '25px',
         border: '1px solid #ccc',
