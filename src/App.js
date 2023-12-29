@@ -34,6 +34,7 @@ function App() {
             </div>
           </div>
           </Link>
+        <Link>Account</Link>  
         <Link className="bars"><FaBars onClick={handleClick} /></Link>
       </div>
       <div className="routes">

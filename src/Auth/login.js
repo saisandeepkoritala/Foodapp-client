@@ -53,7 +53,11 @@ const Login = () => {
         e.preventDefault();
 
         const response = await axios.post("https://mern-food-app-updj.onrender.com/api/v1/user/login",
-        {email:formData.username,password:formData.password})
+        {
+        email:formData.username,
+        password:formData.password
+        })
+        
         console.log(response)
         if(!response.data.error){
         const name=response.data.data.user.name;

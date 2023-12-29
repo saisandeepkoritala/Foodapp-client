@@ -60,3 +60,11 @@
         cursor: pointer;
         margin: 0 auto;
     }
+
+    .signup-form-container .fields div label,.signup-form-container .fields div input{
+        display: block;
+    }
+
+    .signup-form-container .fields>div{
+        justify-content: space-between;
+    }

@@ -44,7 +44,9 @@ function Signup() {
 
     const handleSubmit = async(e) => {
         e.preventDefault();
+
         const response = await axios.post("https://mern-food-app-updj.onrender.com/api/v1/user/signup",formData)
+        
         if(!response.data.error){
             const name=response.data.data.user.name;
             notify(name);
@@ -64,7 +66,7 @@ function Signup() {
         <>
         <div className="signup-form-container">
         <h2>Sign Up</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='fields'>
             <div>
             <label htmlFor="name">Name</label>
             <input
@@ -73,7 +75,7 @@ function Signup() {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                placeholder='john doe'
+                placeholder='John Doe'
                 ref={Ref}
             />
             </div>
@@ -85,7 +87,7 @@ function Signup() {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder='johndoe@gmail.com'
+                placeholder='Johndoe@gmail.com'
             />
             </div>
             <div>
@@ -96,7 +98,7 @@ function Signup() {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                placeholder='Minimum length 8'
+                placeholder='Minimum Length is 8'
             />
             </div>
             <div>
@@ -107,7 +109,7 @@ function Signup() {
                 name="passwordConfirm"
                 value={formData.passwordConfirm}
                 onChange={handleChange}
-                placeholder='confirm password'
+                placeholder='Confirm Password'
             />
             </div>
             <button type="submit">Sign Up</button>
